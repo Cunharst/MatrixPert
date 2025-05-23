@@ -121,3 +121,64 @@
   line-height: 1.5;
   color: #2d3436;
 }
+
+/* Responsivo para telas pequenas (celulares) */
+@media (max-width: 600px) {
+  body {
+    padding: 20px 10px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .matriz-container {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .matriz {
+    grid-template-columns: repeat(3, 40px);
+    gap: 8px;
+    padding: 15px;
+  }
+
+  .matriz input {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .controls {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 18px;
+  }
+
+  .resultado {
+    max-width: 100%;
+    padding: 15px;
+    font-size: 16px;
+  }
+
+  .resultado table td {
+    padding: 8px 10px;
+    font-size: 16px;
+  }
+
+  .passos-container {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .passo {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
