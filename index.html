@@ -3,36 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Aprenda Matrizes</title>
   <link rel="stylesheet" href="assets/style.css">
+  <title>Aprenda Matrizes</title>
 </head>
 <body>
   <h1>Aprenda Matrizes</h1>
 
   <div class="matriz-container">
     <div>
-      <strong>Matriz A</strong>
-      <div class="matriz" id="matrizA"></div>
+      <h3>Matriz A</h3>
+      <div class="matriz" id="matrizA">
+        <input type="number" value="0">
+        <input type="number" value="0">
+        <input type="number" value="0">
+        <input type="number" value="0">
+        <input type="number" value="0">
+        <input type="number" value="0">
+        <input type="number" value="0">
+        <input type="number" value="0">
+        <input type="number" value="0">
+      </div>
     </div>
+
     <div>
-      <strong>Matriz B</strong>
-      <div class="matriz" id="matrizB"></div>
+      <h3>Matriz B</h3>
+      <div class="matriz" id="matrizB">
+        <input type="number" value="0">
+        <input type="number" value="0">
+        <input type="number" value="0">
+        <input type="number" value="0">
+        <input type="number" value="0">
+        <input type="number" value="0">
+        <input type="number" value="0">
+        <input type="number" value="0">
+        <input type="number" value="0">
+      </div>
     </div>
   </div>
 
   <div class="controls">
-    <label for="operacao">Escolha a operação:</label>
-    <select id="operacao">
-      <option value="soma">Soma</option>
-      <option value="subtracao">Subtração</option>
-      <option value="multiplicacao">Multiplicação</option>
-    </select>
-    <br><br>
-    <button onclick="calcular()">Calcular</button>
+    <button class="soma" onclick="calcular('soma')">+ Somar</button>
+    <button class="multiplicacao" onclick="calcular('multiplicacao')">Multiplicar</button>
+    <button class="subtracao" onclick="calcular('subtracao')">− Subtrair</button>
   </div>
 
-  <div class="resultado" id="saidaTexto"></div>
+  <div class="resultado" id="resultado" style="display:none;"></div>
+  <div class="passos-container" id="passos"></div>
 
   <script src="script.js"></script>
-</body>
-</html>

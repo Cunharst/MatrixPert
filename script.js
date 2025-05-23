@@ -1,111 +1,100 @@
-function criarInputs(id, linhas, colunas) {
-    const container = document.getElementById(id);
-    for (let i = 0; i < linhas; i++) {
-      const row = document.createElement("div");
-      for (let j = 0; j < colunas; j++) {
-        const input = document.createElement("input");
-        input.type = "number";
-        input.value = "0";
-        input.id = `${id}_${i}_${j}`;
-        row.appendChild(input);
-      }
-      container.appendChild(row);
+function obterMatriz(id) {
+  const inputs = document.querySelectorAll(`#${id} input`);
+  let matriz = [];
+  for (let i = 0; i < 3; i++) {
+    let linha = [];
+    for (let j = 0; j < 3; j++) {
+      const valor = parseFloat(inputs[i * 3 + j].value) || 0;
+      linha.push(valor);
     }
+    matriz.push(linha);
   }
-  
-  function obterMatriz(id, linhas = 3, colunas = 3) {
-    const matriz = [];
-    for (let i = 0; i < linhas; i++) {
-      const linha = [];
-      for (let j = 0; j < colunas; j++) {
-        const valor = parseFloat(document.getElementById(`${id}_${i}_${j}`).value) || 0;
-        linha.push(valor);
+  return matriz;
+}
+
+function calcular(operacao) {
+  const A = obterMatriz("matrizA");
+  const B = obterMatriz("matrizB");
+  let resultado = [];
+  let passos = [];
+
+  if (operacao === "soma" || operacao === "subtracao") {
+    for (let i = 0; i < 3; i++) {
+      resultado[i] = [];
+      for (let j = 0; j < 3; j++) {
+        const r = operacao === "soma" ? A[i][j] + B[i][j] : A[i][j] - B[i][j];
+        resultado[i][j] = r;
+        passos.push(`C[${i + 1}][${j + 1}] = ${A[i][j]} ${operacao === "soma" ? "+" : "-"} ${B[i][j]} = ${r}`);
       }
-      matriz.push(linha);
     }
-    return matriz;
-  }
-  
-  function exibirResultado(matriz, passos) {
-    const resultadoDiv = document.getElementById("saidaTexto");
-    resultadoDiv.innerHTML = "";
-  
-    const titulo = document.createElement("h3");
-    titulo.textContent = "Resultado da operação:";
-    resultadoDiv.appendChild(titulo);
-  
-    const tabela = document.createElement("table");
-    matriz.forEach((linha) => {
-      const tr = document.createElement("tr");
-      linha.forEach((valor) => {
-        const td = document.createElement("td");
-        td.textContent = valor;
-        tr.appendChild(td);
-      });
-      tabela.appendChild(tr);
-    });
-    resultadoDiv.appendChild(tabela);
-  
-    const passosTitulo = document.createElement("h4");
-    passosTitulo.textContent = "Passo a passo:";
-    resultadoDiv.appendChild(passosTitulo);
-  
-    const containerPassos = document.createElement("div");
-    containerPassos.classList.add("passos-container");
-  
-    passos.forEach((texto) => {
-      const passoDiv = document.createElement("div");
-      passoDiv.classList.add("passo");
-      passoDiv.textContent = texto;
-      containerPassos.appendChild(passoDiv);
-    });
-  
-    resultadoDiv.appendChild(containerPassos);
-  }
-  
-  function calcular() {
-    const A = obterMatriz("matrizA");
-    const B = obterMatriz("matrizB");
-    const operacao = document.getElementById("operacao").value;
-    let resultado = [];
-    let passos = [];
-  
-    if (operacao === "soma" || operacao === "subtracao") {
-      for (let i = 0; i < 3; i++) {
-        let linha = [];
-        for (let j = 0; j < 3; j++) {
-          let valor;
-          if (operacao === "soma") {
-            valor = A[i][j] + B[i][j];
-            passos.push(`C[${i}][${j}] = ${A[i][j]} + ${B[i][j]} = ${valor}`);
-          } else {
-            valor = A[i][j] - B[i][j];
-            passos.push(`C[${i}][${j}] = ${A[i][j]} - ${B[i][j]} = ${valor}`);
-          }
-          linha.push(valor);
+  } else if (operacao === "multiplicacao") {
+    for (let i = 0; i < 3; i++) {
+      resultado[i] = [];
+      for (let j = 0; j < 3; j++) {
+        let soma = 0;
+        let detalhe = [];
+        for (let k = 0; k < 3; k++) {
+          soma += A[i][k] * B[k][j];
+          detalhe.push(`${A[i][k]}×${B[k][j]}`);
         }
-        resultado.push(linha);
-      }
-    } else if (operacao === "multiplicacao") {
-      for (let i = 0; i < 3; i++) {
-        let linha = [];
-        for (let j = 0; j < 3; j++) {
-          let soma = 0;
-          let detalhes = [];
-          for (let k = 0; k < 3; k++) {
-            soma += A[i][k] * B[k][j];
-            detalhes.push(`A[${i}][${k}]*B[${k}][${j}] = ${A[i][k]}*${B[k][j]}`);
-          }
-          linha.push(soma);
-          passos.push(`C[${i}][${j}] = ${detalhes.join(" + ")} = ${soma}`);
-        }
-        resultado.push(linha);
+        resultado[i][j] = soma;
+        passos.push(`C[${i + 1}][${j + 1}] = ${detalhe.join(" + ")} = ${soma}`);
       }
     }
-  
-    exibirResultado(resultado, passos);
   }
-  
-  criarInputs("matrizA", 3, 3);
-  criarInputs("matrizB", 3, 3);
-  
+
+  mostrarResultado(resultado, passos, operacao);
+}
+
+function mostrarResultado(resultado, passos, operacao) {
+  const div = document.getElementById("resultado");
+  div.style.display = "block";
+
+  const explicacoes = {
+    soma: {
+      titulo: "📘 Vamos somar matrizes!",
+      texto: "A gente soma cada quadradinho da Matriz A com o mesmo da Matriz B. É como somar figurinhas! 🧮✨"
+    },
+    subtracao: {
+      titulo: "📙 Vamos subtrair matrizes!",
+      texto: "Subtrair é tirar. Tiramos os números da Matriz B dos números da Matriz A, quadradinho por quadradinho. 😯➖🎲"
+    },
+    multiplicacao: {
+      titulo: "📗 Multiplicando matrizes!",
+      texto: "Multiplicar é como uma dança entre linhas e colunas 💃🕺! A linha da Matriz A encontra a coluna da Matriz B!"
+    }
+  };
+
+  let html = `
+    <div style="background:#fff0f6; border-left: 8px solid #ff6b81; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+      <h2 style="margin-top:0;">${explicacoes[operacao].titulo}</h2>
+      <p style="font-size: 16px;">${explicacoes[operacao].texto}</p>
+    </div>
+
+    <h3 style="text-align:center;">🎯 Resultado da Matriz</h3>
+    <table style="margin:auto; border-collapse: collapse; background-color:#ffeaa7; border-radius: 10px;">
+      ${resultado.map(linha =>
+        `<tr>${linha.map(valor =>
+          `<td style="border:2px solid #dfe6e9; padding:15px; font-size:20px; font-weight:bold; text-align:center;">${valor}</td>`).join("")}</tr>`).join("")}
+    </table>
+
+    <h3 style="text-align:center; margin-top: 30px;">👣 Passo a passo divertido!</h3>
+    <div style="display: flex; flex-direction: column; gap: 10px; align-items: center; margin-top: 10px;">
+      ${passos.map((texto, i) =>
+        `<div style="background-color: #dfe6e9; padding: 12px 18px; border-radius: 10px; width: 90%; max-width: 600px; font-size: 16px; box-shadow: 2px 2px 6px rgba(0,0,0,0.1);">
+          🧩 <strong>Passo ${i + 1}:</strong> ${formatarPasso(texto)}
+        </div>`
+      ).join("")}
+    </div>
+  `;
+
+  div.innerHTML = html;
+}
+
+function formatarPasso(texto) {
+  return texto
+    .replace(/C\[(\d+)\]\[(\d+)\]/g, '<strong>Resultado[$1][$2]</strong>')
+    .replace(/\*/g, ' × ')
+    .replace(/\+/g, ' ➕ ')
+    .replace(/-/g, ' ➖ ');
+}
