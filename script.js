@@ -53,15 +53,15 @@ function mostrarResultado(resultado, passos, operacao) {
   const explicacoes = {
     soma: {
       titulo: "📘 Vamos somar matrizes!",
-      texto: "A gente soma cada quadradinho da Matriz A com o mesmo da Matriz B. É como somar figurinhas! 🧮✨"
+      texto: "A gente soma cada quadradinho da Matriz A com o mesmo da Matriz B. É como somar figurinhas! 🧮✨<br> Lembrando sempre que para somar, as matrizes devem ter o mesmo tamanho!"
     },
     subtracao: {
       titulo: "📙 Vamos subtrair matrizes!",
-      texto: "Subtrair é tirar. Tiramos os números da Matriz B dos números da Matriz A, quadradinho por quadradinho. 😯➖🎲"
+      texto: "Subtrair é tirar. Tiramos os números da Matriz B dos números da Matriz A, quadradinho por quadradinho. 😯➖🎲 <br>Lembrando sempre que para diminuir, as matrizes devem ter o mesmo tamanho!"
     },
     multiplicacao: {
       titulo: "📗 Multiplicando matrizes!",
-      texto: "Multiplicar é como uma dança entre linhas e colunas 💃🕺! A linha da Matriz A encontra a coluna da Matriz B! Lembrando, que o número de colunas da primeira matriz deve ser igual ao número de linhas da segunda!"
+      texto: "Multiplicar é como uma dança entre linhas e colunas 💃🕺! A linha da Matriz A encontra a coluna da Matriz B! <br>Lembrando, que o número de colunas da primeira matriz deve ser igual ao número de linhas da segunda!"
     }
   };
 
