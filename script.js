@@ -61,7 +61,7 @@ function mostrarResultado(resultado, passos, operacao) {
     },
     multiplicacao: {
       titulo: "📗 Multiplicando matrizes!",
-      texto: "Multiplicar é como uma dança entre linhas e colunas 💃🕺! A linha da Matriz A encontra a coluna da Matriz B!"
+      texto: "Multiplicar é como uma dança entre linhas e colunas 💃🕺! A linha da Matriz A encontra a coluna da Matriz B! Lembrando, que o número de colunas da primeira matriz deve ser igual ao número de linhas da segunda!"
     }
   };
 
