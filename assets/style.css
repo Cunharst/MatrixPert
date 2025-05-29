@@ -1,10 +1,19 @@
  body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #6c5ce7, #341f97);
       color: white;
       text-align: center;
       padding: 40px 20px;
+      background-image: url('fundo-horizontal.jpg'), linear-gradient(135deg, #6c5ce7, #341f97);
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-attachment: fixed;
+      background-size: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
     }
 
     h1 {
@@ -170,6 +179,7 @@
 @media (max-width: 600px) {
   body {
     padding: 20px 10px;
+    background-image: url('fundo-vertical.jpg'), linear-gradient(135deg, #6c5ce7, #341f97);
   }
 
   h1 {
