@@ -50,6 +50,49 @@
       flex-wrap: wrap;
     }
 
+button {
+      padding: 10px 40px;
+      font-size: 2.5rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      transition: 0.3s;
+    }
+
+    button:hover {
+     transform: scale(1.1);
+    }
+
+    button.soma {
+      background-color: rgb(0, 206, 201);
+      color: #fff;
+    }
+
+    button.soma:hover {
+      box-shadow: 0 0 20px rgba(0, 206, 201, 0.5);
+    }
+
+    button.multiplicacao {
+      background-color: rgb(253, 150, 68);
+      color: #fff;
+    }
+
+    button.multiplicacao:hover {
+      box-shadow: 0 0 20px rgba(253, 150, 68, 0.5);
+    }
+
+    button.subtracao {
+      background-color: rgb(255, 107, 129);
+      color: #fff;
+    }
+
+    button.subtracao:hover {
+      box-shadow: 0 0 20px rgba(255, 107, 129, 0.5);
+    }
+
+/*
     button {
       padding: 15px 30px;
       font-size: 18px;
@@ -79,6 +122,7 @@
       background-color: #ff6b81;
       color: #fff;
     }
+*/
 
     .resultado {
       margin-top: 30px;
