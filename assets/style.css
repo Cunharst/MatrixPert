@@ -50,7 +50,7 @@
       flex-wrap: wrap;
     }
 
-button {
+    button {
       padding: 10px 40px;
       font-size: 40px;
       font-weight: bold;
@@ -200,9 +200,13 @@ button {
   }
 
   button {
-    width: 75%;
+    width: 100%;
     padding: 12px 0;
     font-size: 28px;
+  }
+
+  button:hover {
+    transform: scale(1.0);
   }
 
   .resultado {
